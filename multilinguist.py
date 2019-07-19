@@ -1,6 +1,6 @@
 import requests
 import json
-
+import random
 class Multilinguist:
   """This class represents a world traveller who knows 
   what languages are spoken in each country around the world
@@ -77,4 +77,55 @@ class Multilinguist:
     response = requests.get(self.translatr_base_url, params=params)
     json_response = json.loads(response.text)
     return json_response['translationText']
+
+
+class MathGenius(Multilinguist): 
+  def __init__(self): 
+    super().__init__()
+    
+  def report_total(self, list_of_numbers): 
+    sum_numbers = 0 
+    for number in list_of_numbers: 
+      sum_numbers += number 
+    message = f'The sum of the numbers from the list is {sum_numbers} '
+    
+    
+    return self.say_in_local_language(message)
+
+class QuoteCollector(Multilinguist): 
+  
+  def __init__(self): 
+    super().__init__() 
+    self.fav_quotes = ["The foolish man think with narrow mind and speak with wide mouth.-Charlie Chin", "Seek the truth, no matter where it lies.-Metallica", "The strength of the Constitution lies entirely in the determination of each citizen to defend it.-Albert Einstein", "Conservatives want live babies so they can raise them to be dead soldiers.-George Carlin", "Conservatives want live babies so they can raise them to be dead soldiers.-George Carlin", "We've got far too many hung juries and not enough hung defendants.-Dennis Miller", "There is no knowledge that is not power.-Mortal Kombat 3"] 
+    self.quote_with_topic = []
+
+  def add_quote(self, quote, topic):
+    # topics = {} 
+    # topics[quote] = topic
+    self.fav_quotes.append(quote) 
+    self.quote_with_topic.append(topic)
+  
+  def random_quote(self): 
+    quote = random.choice(self.fav_quotes) 
+    return self.say_in_local_language(quote)
+    
+  
+    
+
+# me = MathGenius()
+# print(me.report_total([23,45,676,34,5778,4,23,5465])) # The total is 12048
+# me.travel_to("France")
+# print(me.report_total([6,3,6,68,455,4,467,57,4,534])) # है को कुल 1604
+# me.travel_to("Italy")
+# print(me.report_total([324,245,6,343647,686545])) # È Il totale 1030767
+
+
+quoter = QuoteCollector()
+print(quoter.random_quote())
+quoter.travel_to("France")
+print(quoter.random_quote())
+quoter.travel_to("Italy")
+quoter.add_quote('hello', 'random')
+print(quoter.random_quote())
+
 
